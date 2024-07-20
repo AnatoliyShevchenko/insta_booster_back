@@ -14,9 +14,9 @@ Backend for instagram booster
 Открываем файл конфигурации Тор:
 - sudo nano /etc/tor/torrc
 Раскомментируем или дописываем:
-ControlPort 9051
-HashedControlPassword 16:YOUR_HASHED_PASSWORD
-CookieAuthentication 1
+- ControlPort 9051
+- HashedControlPassword 16:YOUR_HASHED_PASSWORD
+- CookieAuthentication 1
 
 Запускаем тор: 
 - sudo service tor start

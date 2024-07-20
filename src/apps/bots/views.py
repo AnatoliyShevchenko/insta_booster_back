@@ -2,7 +2,6 @@
 from fastapi import APIRouter, status, UploadFile, Response
 
 # Local
-from src.apps.abstract.schemas import ResponseSchema
 from src.apps.abstract.schemas import ResponseSchema, ErrorSchema
 from .orm import BotsOrm
 from .data_processing import DataProcessing
@@ -12,11 +11,18 @@ class BotsView(DataProcessing):
     """View for Bots."""
 
     def __init__(self) -> None:
-        self.path = "/bots"
+        self.path = "/bots/"
         self.orm = BotsOrm()
         self.router = APIRouter(prefix="/api/v1", tags=["Create Bots"])
         self.router.add_api_route(
             path=self.path, endpoint=self.post, 
+            description="""Эндпоинт для создания ботов, 
+            принимает текстовый файл с логинами и паролями, 
+            лучше всего в формате txt. 
+            Файл должен выглядеть примерно так: \n
+            Логин Пароль\n
+            Логин Пароль
+            """,
             methods=["POST"], responses={
                 200: {"model": ResponseSchema},
                 500: {"model": ErrorSchema},
