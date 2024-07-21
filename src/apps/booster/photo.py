@@ -9,6 +9,7 @@ import time
 
 # Local
 from .base import BaseForBooster
+from src.settings.base import logger
 
 
 class ActionsWithPhoto(BaseForBooster):
@@ -25,7 +26,7 @@ class ActionsWithPhoto(BaseForBooster):
             time.sleep(5)
             comment.send_keys("nice")
             time.sleep(5)
-            print("Comment added")
+            logger.info(msg="Comment added!")
             return True
         except Exception as e:
             return False
@@ -40,7 +41,7 @@ class ActionsWithPhoto(BaseForBooster):
             )
             button.click()
             time.sleep(5)
-            print("Comment sent")
+            logger.info(msg="Comment sent!")
             time.sleep(5)
             return True
         except Exception as e:
@@ -65,6 +66,7 @@ class ActionsWithPhoto(BaseForBooster):
             button.click()
             time.sleep(1)
             button.click()
+            logger.info(msg="Like sent!")
             return True
         except Exception as e:
             return False

@@ -9,6 +9,7 @@ import time
 
 # Local
 from .base import BaseForBooster
+from src.settings.base import logger
 
 
 class ActionsWithReels(BaseForBooster):
@@ -25,6 +26,7 @@ class ActionsWithReels(BaseForBooster):
             button.click()
             time.sleep(1)
             button.click()
+            logger.info(msg="Like sent!")
             return True
         except:
             return False
@@ -40,7 +42,7 @@ class ActionsWithReels(BaseForBooster):
             place.click()
             time.sleep(1)
             place.click()
-            print("Comments opened")
+            logger.info(msg="Comments opened!")
             return True
         except:
             return False
@@ -55,7 +57,7 @@ class ActionsWithReels(BaseForBooster):
             time.sleep(5)
             comment.send_keys("nice")
             time.sleep(5)
-            print("Comment added")
+            logger.info(msg="Comment added!")
             return True
         except:
             return False
@@ -69,7 +71,7 @@ class ActionsWithReels(BaseForBooster):
             )
             button.click()
             time.sleep(5)
-            print("Comment sended")
+            logger.info(msg="Comment sent!")
             return True
         except:
             return False

@@ -11,5 +11,6 @@ class BotSchema(BaseModel):
 
 class BotsSchema(BaseModel):
     """Schema for view all bots."""
-
-    response: list[BotSchema]
+    
+    page: int = Field(ge=0)
+    bots: list[BotSchema]

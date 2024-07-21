@@ -1,0 +1,17 @@
+services:
+
+  # не буду пихать сюда постгрес и редис потому что на сервере они уже есть
+
+  web:
+    build: .
+    container_name: booster_back
+    command: bash -c "alembic upgrade head && python main.py"
+    restart: always
+    volumes:
+      - booster_volume:/app/volumes
+    env_file:
+      - .env
+    network_mode: host
+
+volumes:
+  booster_volume_volume:

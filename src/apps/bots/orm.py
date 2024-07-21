@@ -1,6 +1,5 @@
 # SQLAlchemy
 from sqlalchemy import select
-from sqlalchemy import Sequence
 
 # Local
 from src.settings.base import session, logger
@@ -20,7 +19,6 @@ class BotsOrm:
                     )
                     conn.add(instance=obj)
                     await conn.commit()
-                await conn.aclose()
             return True
         except Exception as e:
             logger.error(msg="Cannot create bot:", exc_info=e)
@@ -29,15 +27,21 @@ class BotsOrm:
     @staticmethod
     async def get_bots(
         limit: int = 100, offset: int = 0
-    ) -> Sequence[Bots]:
+    ):
         async with session() as conn:
             users = await conn.execute(
                 select(Bots).limit(limit).offset(offset)
             )
             result = users.scalars().all()
-            await conn.aclose()
         return result
-
+    
+    @staticmethod
+    async def get_all_bots():
+        async with session() as conn:
+            users = await conn.execute(select(Bots))
+            result = users.scalars().all()
+        return result
+    
     @staticmethod
     async def create_bots_batch(
         bots_data: list[dict[str, str]]
@@ -48,7 +52,6 @@ class BotsOrm:
                     bots = [Bots(**data) for data in bots_data]
                     conn.add_all(bots)
                     await conn.commit()
-                await conn.aclose()
             return True
         except Exception as e:
             logger.error(msg="Cannot create bots batch:", exc_info=e)
