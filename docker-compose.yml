@@ -14,4 +14,4 @@ services:
     network_mode: host
 
 volumes:
-  booster_volume_volume:
+  booster_volume:
