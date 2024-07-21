@@ -35,13 +35,13 @@ class BaseForBooster:
 
     @staticmethod
     def create_driver() -> WebDriver:
-        # proxy = "127.0.0.1:9050"
+        proxy = "127.0.0.1:9050"
         options = webdriver.ChromeOptions()
-        # options.add_argument("--headless")  # Закомментировать параметр для тестов, чтобы видеть сам браузер
-        # options.add_argument("--disable-gpu")
-        # options.add_argument("--no-sandbox")
-        # options.add_argument(f"--proxy-server=socks5://{proxy}")
-        # options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--headless")  # Закомментировать параметр для тестов, чтобы видеть сам браузер
+        options.add_argument("--disable-gpu")
+        options.add_argument("--no-sandbox")
+        options.add_argument(f"--proxy-server=socks5://{proxy}")
+        options.add_argument("--disable-dev-shm-usage")
         driver_path = ChromeDriverManager().install()
         service = Service(executable_path=driver_path)
         driver = webdriver.Chrome(service=service, options=options)
